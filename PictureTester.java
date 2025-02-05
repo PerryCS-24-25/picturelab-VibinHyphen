@@ -11,8 +11,10 @@ public class PictureTester {
      * Method to test the PictureExplorer
      */
     public static void testExplorer() {
-        Picture karl = new Picture("blue-karl.jpg");
-        karl.explore();   
+        Picture prime = new Picture("transformersPrime.jpg");
+        Picture smallPrime = prime.scale(1.5,1.5);
+        smallPrime.write("smallMyPicture.jpg"); 
+        smallPrime.explore();
     }
 
     /**
