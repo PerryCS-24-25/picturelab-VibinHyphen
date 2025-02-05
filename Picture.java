@@ -127,17 +127,80 @@ public class Picture extends SimplePicture {
     }
 
     /**
+     * keeps only blue in this image
+     */
+    public void keepOnlyBlue() {
+        zeroGreen();
+        zeroRed(); 
+    }
+
+    /**
      * Removes all the red from this image.
      */
     public void zeroRed() {
-        //TODO: Write this method.
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setRed(0);
+            }
+        }
+    }
+
+    /**
+     * keeps only red in this image
+     */
+    public void keepOnlyRed() {
+        zeroGreen();
+        zeroBlue(); 
     }
 
     /**
      * Removes all the green from this image.
      */
     public void zeroGreen() {
-        //TODO: Write this method.   
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setGreen(0);
+            }
+        }  
+    }
+
+    /**
+     * keeps only green in this image
+     */
+    public void keepOnlyGreen() {
+        zeroRed();
+        zeroBlue(); 
+    }
+
+    /**
+     * method that creates a negative picture
+     */
+    public void negate() {
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setGreen(255 - pixelObj.getGreen());
+                pixelObj.setRed(255 - pixelObj.getRed());
+                pixelObj.setBlue(255 - pixelObj.getBlue());
+            }
+        } 
+    }
+
+    /**
+     * method to set a picture to greyscale
+     */
+    public void grayscale() {
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                int avg = (pixelObj.getBlue() + pixelObj.getGreen() + pixelObj.getRed())/3;
+                pixelObj.setGreen(avg);
+                pixelObj.setRed(avg);
+                pixelObj.setBlue(avg);
+            }
+        } 
     }
 
     /**
