@@ -203,6 +203,36 @@ public class Picture extends SimplePicture {
         } 
     }
 
+    public void FixUnderwater() {
+        Pixel[][] pixels = this.getPixels2D();
+        float mostRed = 0;
+        float mostBlue = 0;
+        float mostGreen = 0;
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                if(pixelObj.getRed() > mostRed) {
+                    mostRed = pixelObj.getRed();
+                }
+                if(pixelObj.getGreen() > mostGreen) {
+                    mostGreen = pixelObj.getGreen();
+                }
+                if(pixelObj.getBlue() > mostBlue) {
+                    mostBlue = pixelObj.getBlue();
+                }
+            }
+        } 
+        mostRed = (225/mostRed);
+        mostGreen = (225/mostGreen);
+        mostBlue = (225/mostBlue);
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setGreen(Math.round(pixelObj.getGreen() * mostGreen));
+                pixelObj.setRed(Math.round(pixelObj.getRed() * mostRed));
+                pixelObj.setBlue(Math.round(pixelObj.getBlue() * mostBlue));
+            }
+        } 
+    }
+
     /**
      * Method that mirrors the picture around a vertical mirror in the center of
      * the picture from left to right
