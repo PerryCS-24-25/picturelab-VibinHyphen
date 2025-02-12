@@ -156,6 +156,22 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
      * 500% zoom level
      */
     private JMenuItem fiveHundred;
+    /**
+     * seperate colors
+     */
+    private JMenuItem seperateColors;
+    /**
+     * invert colors
+     */
+    private JMenuItem invertColors;
+    /**
+     * grayscale
+     */
+    private JMenuItem grayscale;
+    /**
+     * black and white filter
+     */
+    private JMenuItem blackAndWhite;
 
     /**
      * The picture being explored
@@ -258,6 +274,10 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         hundredFifty = new JMenuItem("150%");
         twoHundred = new JMenuItem("200%");
         fiveHundred = new JMenuItem("500%");
+        seperateColors = new JMenuItem("Seperate Colors");
+        invertColors = new JMenuItem("Invert Colors");
+        grayscale = new JMenuItem("Grayscale");
+        blackAndWhite = new JMenuItem("Black and White");
 
         // add the action listeners
         twentyFive.addActionListener(this);
@@ -270,6 +290,10 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         open.addActionListener(this);
         save.addActionListener(this);
         close.addActionListener(this);
+        seperateColors.addActionListener(this);
+        invertColors.addActionListener(this);
+        grayscale.addActionListener(this);
+        blackAndWhite.addActionListener(this);
 
         // add the menu items to the menus
         fileMenu.add(open);
@@ -282,6 +306,10 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
         zoomMenu.add(hundredFifty);
         zoomMenu.add(twoHundred);
         zoomMenu.add(fiveHundred);
+        filtersMenu.add(seperateColors);
+        filtersMenu.add(invertColors);
+        filtersMenu.add(grayscale);
+        filtersMenu.add(blackAndWhite);
         menuBar.add(fileMenu);
         menuBar.add(zoomMenu);
         menuBar.add(filtersMenu);
@@ -390,6 +418,36 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
 
         if (a.getActionCommand().equals(close.getActionCommand())) { 
             pictureFrame.dispose();
+        }
+        
+        if (a.getActionCommand().equals(seperateColors.getActionCommand())) { 
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.keepOnlyBlue();
+            newPic.explore();
+            Picture newPic2 = new Picture((SimplePicture)picture);
+            newPic2.keepOnlyRed();
+            newPic2.explore();
+            Picture newPic3 = new Picture((SimplePicture)picture);
+            newPic3.keepOnlyGreen();
+            newPic3.explore();
+        }
+
+        if (a.getActionCommand().equals(invertColors.getActionCommand())) { 
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.negate();
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(grayscale.getActionCommand())) { 
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.grayscale();
+            newPic.explore();
+        }
+
+        if (a.getActionCommand().equals(blackAndWhite.getActionCommand())) { 
+            Picture newPic = new Picture((SimplePicture)picture);
+            newPic.blackAndWhite();
+            newPic.explore();
         }
     }
 
