@@ -167,6 +167,18 @@ public class PictureTester {
     }
 
     /**
+     * method to test encode and decode
+     */
+    public static void testEncodeAndDecode() {
+        Picture beach = new Picture("beach.jpg");
+        beach.explore();
+        beach.encode();
+        beach.explore();
+        beach.decode();
+        beach.explore();
+    }
+
+    /**
      * Method to test edgeDetection
      */
     public static void testEdgeDetection() {
@@ -209,14 +221,14 @@ public class PictureTester {
         //testMirrorDiagonal();
         //testMirrorTemple();
         //testMirrorArms();
-        testMirrorGull();
+        //testMirrorGull();
         //testMirrorDiagonal();
         //testCollage();
         //testCopy();
         //testEdgeDetection();
         //testEdgeDetection2();
         //testChromakey();
-        //testEncodeAndDecode();
+        testEncodeAndDecode();
         //testGetCountRedOverValue(250);
         //testSetRedToHalfValueInTopHalf();
         //testClearBlueOverValue(200);

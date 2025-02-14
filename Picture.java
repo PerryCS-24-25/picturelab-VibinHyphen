@@ -385,9 +385,9 @@ public class Picture extends SimplePicture {
          }
     }
 
-        /**
-     * mirror part of a snowman
-     */
+    /**
+    * mirror part of a snowman
+    */
     public void mirrorGull() {
         int mirrorPoint = 345;
         Pixel leftPixel = null;
@@ -403,6 +403,46 @@ public class Picture extends SimplePicture {
                 rightPixel.setColor(leftPixel.getColor());
             }
          }
+    }
+    
+    public void encode() {
+        Pixel[][] pixels = this.getPixels2D();
+        Picture msg = new Picture("msg.jpg");
+        Pixel[][] msgPixels = msg.getPixels2D();
+        for (int row = 0; row < msgPixels.length; row++) {
+            for (int col = 0; col < msgPixels[0].length; col++) {
+                if(pixels[row][col].getRed() % 2 == 1) {
+                    pixels[row][col].setRed(pixels[row][col].getRed() - 1);
+                }
+            }
+        }
+        for (int row = 0; row < msgPixels.length; row++) {
+            for (int col = 0; col < msgPixels[0].length; col++) {
+                if(msgPixels[row][col].getRed() < 225) {
+                    pixels[row][col].setRed(pixels[row][col].getRed() + 1);
+                }
+            }
+        }
+    }
+
+    /**
+    * method to reveal a message in a picture 
+    */
+    public void decode() {
+        Pixel[][] pixels = this.getPixels2D();
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                if(pixelObj.getRed() % 2 == 1) {
+                    pixelObj.setRed(0);
+                    pixelObj.setBlue(0);
+                    pixelObj.setGreen(0);
+                } else {
+                    pixelObj.setRed(255);
+                    pixelObj.setBlue(255);
+                    pixelObj.setGreen(255);
+                }
+            }  
+        } 
     }
 
     /**
@@ -477,9 +517,7 @@ public class Picture extends SimplePicture {
      */
     public static void main(String[] args) {
         Picture beach = new Picture("beach.jpg");
-        beach.explore();
-        beach.zeroBlue();
-        beach.explore();
+        
     }
 
 } // this } is the end of class Picture, put all new methods before this
